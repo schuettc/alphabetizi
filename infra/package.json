@@ -1,0 +1,28 @@
+{
+  "name": "alphabetize-infra",
+  "version": "1.0.0",
+  "description": "Infrastructure for the Alphabetize Record Collection Survey",
+  "main": "dist/app.js",
+  "scripts": {
+    "build": "tsc",
+    "deploy": "cdk deploy --region us-east-1",
+    "synth": "cdk synth"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/fs-extra": "11.0.4",
+    "@types/node": "22.13.8",
+    "aws-cdk": "2.1001.0",
+    "aws-cdk-lib": "2.181.1",
+    "constructs": "10.4.2",
+    "fs-extra": "11.3.0",
+    "ts-node": "10.9.2",
+    "typescript": "5.8.2"
+  },
+  "packageManager": "pnpm@9.5.0+sha512.140036830124618d624a2187b50d04289d5a087f326c9edfc0ccd733d76c4f52c3a313d4fc148794a2a9d81553016004e6742e8cf850670268a7387fc220c903",
+  "dependencies": {
+    "@types/aws-lambda": "^8.10.126"
+  }
+}

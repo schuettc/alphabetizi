@@ -1,0 +1,20 @@
+{
+  "name": "alphabetize-api-handler",
+  "version": "1.0.0",
+  "description": "Lambda function to handle survey submissions",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.500.0",
+    "@aws-sdk/lib-dynamodb": "^3.500.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "@types/aws-lambda": "^8.10.136",
+    "@types/uuid": "^9.0.8",
+    "typescript": "^5.3.3"
+  }
+}

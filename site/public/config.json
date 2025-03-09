@@ -1,0 +1,4 @@
+{
+  "apiUrl": "https://${Token[TOKEN.60]}.execute-api.us-east-1.${Token[AWS.URLSuffix.7]}/${Token[TOKEN.68]}/",
+  "siteUrl": "https://app.cataloging.music"
+}
