@@ -520,40 +520,10 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Chart type selector and View All Results - outside the container */}
-              <div className='flex justify-between items-center'>
-                {showResults && (
-                  <div className='bg-gray-100 rounded-lg p-1 inline-flex'>
-                    <button
-                      onClick={() => setIsPieChart(true)}
-                      className={`p-0.5 md:p-1 rounded-md flex items-center ${
-                        isPieChart ? 'bg-white shadow-sm' : 'text-gray-500'
-                      }`}
-                      aria-label='Pie Chart View'
-                      title='Pie Chart View'
-                    >
-                      <PieChart className='h-3.5 w-3.5 md:h-4 md:w-4' />
-                    </button>
-                    <button
-                      onClick={() => setIsPieChart(false)}
-                      className={`p-0.5 md:p-1 rounded-md flex items-center ${
-                        !isPieChart ? 'bg-white shadow-sm' : 'text-gray-500'
-                      }`}
-                      aria-label='Bar Chart View'
-                      title='Bar Chart View'
-                    >
-                      <BarChart className='h-3.5 w-3.5 md:h-4 md:w-4' />
-                    </button>
-                  </div>
-                )}
-
-                <button
-                  onClick={viewAllResults}
-                  disabled={loading && !showResults}
-                  className='px-2 py-0.5 md:px-3 md:py-1 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 disabled:opacity-50 text-xs md:text-sm'
-                >
-                  View All Results
-                </button>
+              {/* Footer section - remove chart selector from here */}
+              {/* Keep this div for spacing if needed */}
+              <div className='flex justify-start items-center mt-4'>
+                {/* Chart selector has been moved to the fixed position above progress bar */}
               </div>
 
               {/* Display error if any */}
@@ -567,9 +537,54 @@ export default function App() {
         </div>
       </div>
 
-      {/* Progress bar at the bottom */}
+      {/* Footer with Chart selector, View Results button and Progress bar */}
       <div className='mt-auto pb-4 px-4 sm:px-6 lg:px-8'>
         <div className='mx-auto max-w-md md:max-w-xl lg:max-w-2xl'>
+          {/* Controls row - chart selector and view results button */}
+          <div className='mb-4 flex justify-between items-center'>
+            {/* Left side: Chart selector (only when showing results) */}
+            <div>
+              {showResults ? (
+                <div className='bg-gray-100 rounded-lg p-1 inline-flex'>
+                  <button
+                    onClick={() => setIsPieChart(true)}
+                    className={`p-0.5 md:p-1 rounded-md flex items-center ${
+                      isPieChart ? 'bg-white shadow-sm' : 'text-gray-500'
+                    }`}
+                    aria-label='Pie Chart View'
+                    title='Pie Chart View'
+                  >
+                    <PieChart className='h-3.5 w-3.5 md:h-4 md:w-4' />
+                  </button>
+                  <button
+                    onClick={() => setIsPieChart(false)}
+                    className={`p-0.5 md:p-1 rounded-md flex items-center ${
+                      !isPieChart ? 'bg-white shadow-sm' : 'text-gray-500'
+                    }`}
+                    aria-label='Bar Chart View'
+                    title='Bar Chart View'
+                  >
+                    <BarChart className='h-3.5 w-3.5 md:h-4 md:w-4' />
+                  </button>
+                </div>
+              ) : (
+                <div className='invisible'>
+                  {/* Empty placeholder to maintain layout */}
+                  <div className='h-6 md:h-7 w-16'></div>
+                </div>
+              )}
+            </div>
+
+            {/* Right side: View Results Button - always in the same position */}
+            <button
+              onClick={viewAllResults}
+              disabled={loading && !showResults}
+              className='px-2 py-0.5 md:px-3 md:py-1 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 disabled:opacity-50 text-xs md:text-sm'
+            >
+              View All Results
+            </button>
+          </div>
+
           {/* Progress text - now centered above the bar */}
           <div className='mb-2 text-xs md:text-sm text-gray-600 text-center'>
             {completedQuestionCount} of {surveyData.totalQuestions} questions
