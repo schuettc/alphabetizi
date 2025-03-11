@@ -1,0 +1,1096 @@
+{
+  "groups": [
+    {
+      "questions": [
+        {
+          "id": "dark-side-of-the-moon",
+          "text": "Where would you file Dark Side of the Moon?",
+          "options": [
+            {
+              "id": "P",
+              "text": "Under 'P'"
+            },
+            {
+              "id": "F",
+              "text": "Under 'F'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Pink Floyd - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Pink_Floyd"
+            },
+            {
+              "title": "Dark Side of the Moon - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Dark_Side_of_the_Moon"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/dark-side-of-the-moon.png",
+            "alt": "Dark Side of the Moon album cover"
+          }
+        },
+        {
+          "id": "1989-taylor-swift",
+          "text": "Where would you file Taylor Swift's '1989' album?",
+          "options": [
+            {
+              "id": "S",
+              "text": "Under 'S'"
+            },
+            {
+              "id": "T",
+              "text": "Under 'T'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Taylor Swift - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Taylor_Swift"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/taylor-swift-1989.png",
+            "alt": "1989 album cover"
+          }
+        },
+        {
+          "id": "fetch-the-bolt-cutters-fiona-apple",
+          "text": "Where would you file Fiona Apple's 'Fetch the Bolt Cutters' album?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Under 'A'"
+            },
+            {
+              "id": "F",
+              "text": "Under 'F'"
+            },
+            {
+              "id": "M",
+              "text": "Under 'M'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Fiona Apple - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Fiona_Apple"
+            },
+            {
+              "title": "Fetch the Bolt Cutters - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Fetch_the_Bolt_Cutters"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/fiona-apple-fetch-the-bolt-cutters.png",
+            "alt": "Fetch the Bolt Cutters album cover"
+          }
+        },
+        {
+          "id": "ministrel-in-the-gallery",
+          "text": "Where would you file 'Ministrel in the Gallery'?",
+          "options": [
+            {
+              "id": "J",
+              "text": "Under 'J'"
+            },
+            {
+              "id": "T",
+              "text": "Under 'T'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Jethro Tull - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Jethro_Tull_(band)"
+            },
+            {
+              "title": "Ministrel in the Gallery - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Ministrel_in_the_Gallery"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/jethro-tull-ministrel-in-the-gallery.jpg",
+            "alt": "Ministrel in the Gallery album cover"
+          }
+        },
+        {
+          "id": "taj-mahal",
+          "text": "Where would you file Taj Mahal?",
+          "options": [
+            {
+              "id": "T",
+              "text": "Under 'T'"
+            },
+            {
+              "id": "M",
+              "text": "Under 'M'"
+            },
+            {
+              "id": "F",
+              "text": "Under 'F'"
+            },
+            {
+              "id": "H",
+              "text": "Under 'H'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Taj Mahal (musician) - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Taj_Mahal_(musician)"
+            },
+            {
+              "title": "Taj Mahal (album) - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Taj_Mahal_(album)"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/taj-mahal-taj-mahal.jpg",
+            "alt": "Taj Mahal album cover"
+          }
+        },
+        {
+          "id": "tonio-k",
+          "text": "Where would you file 'Life in the Foodchain'?",
+          "options": [
+            {
+              "id": "T",
+              "text": "Under 'T'"
+            },
+            {
+              "id": "K",
+              "text": "Under 'K'"
+            },
+            {
+              "id": "S",
+              "text": "Under 'S'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Tonio K. - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Tonio_K"
+            },
+            {
+              "title": "Life in the Foodchain - Discogs",
+              "url": "https://www.discogs.com/master/191216-Tonio-K-Life-In-The-Foodchain"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/tonio-k-life-in-the-foodchain.jpg",
+            "alt": "Life in the Foodchain album cover"
+          }
+        },
+        {
+          "id": "twenty-one-pilots",
+          "text": "Where would you file 'Blurryface'?",
+          "options": [
+            {
+              "id": "T",
+              "text": "Under 'T'"
+            },
+            {
+              "id": "P",
+              "text": "Under 'P'"
+            },
+            {
+              "id": "NUM",
+              "text": "Under '2' or '#'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Blurryface - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Blurryface"
+            },
+            {
+              "title": "Twenty One Pilots - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Twenty_One_Pilots"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/twenty-one-pilots-blurryface.png",
+            "alt": "Blurryface album cover"
+          }
+        }
+      ]
+    },
+    {
+      "id": "prefixes",
+      "name": "Prefixes and Articles",
+      "description": "How do you handle prefixes like 'The', 'A', or 'An'?",
+      "questions": [
+        {
+          "id": "who-s-next",
+          "text": "Where would you file 'Who's Next'?",
+          "options": [
+            {
+              "id": "W",
+              "text": "Under 'W'"
+            },
+            {
+              "id": "T",
+              "text": "Under 'T'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "The Who - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/The_Who"
+            },
+            {
+              "title": "Who's Next - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Who%27s_Next"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/the-who-who-s-next.jpg",
+            "alt": "Who's Next album cover"
+          }
+        },
+        {
+          "id": "boxer",
+          "text": "Where would you file 'Boxer'?",
+          "options": [
+            {
+              "id": "N",
+              "text": "Under 'N'"
+            },
+            {
+              "id": "T",
+              "text": "Under 'T'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "The National - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/The_National_(band)"
+            },
+            {
+              "title": "Boxer (album) - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Boxer_(The_National_album)"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/the-national-boxer.jpg",
+            "alt": "Boxer album cover"
+          }
+        },
+        {
+          "id": "midnight-marauders",
+          "text": "Where would you file 'Midnight Marauders'?",
+          "options": [
+            {
+              "id": "T",
+              "text": "Under 'T'"
+            },
+            {
+              "id": "A",
+              "text": "Under 'A'"
+            },
+            {
+              "id": "Q",
+              "text": "Under 'Q'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Midnight Marauders - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Midnight_Marauders"
+            },
+            {
+              "title": "A Tribe Called Quest - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/A_Tribe_Called_Quest"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/a-tribe-called-quest-midnight-marauders.jpg",
+            "alt": "Midnight Marauders album cover"
+          }
+        },
+        {
+          "id": "rearrange-beds",
+          "text": "Where would you file 'Rearrange Beds'?",
+          "options": [
+            {
+              "id": "H",
+              "text": "Under 'H'"
+            },
+            {
+              "id": "A",
+              "text": "Under 'A'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Rearrange Beds - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Rearrange_Beds"
+            },
+            {
+              "title": "An Horse - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/An_Horse"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/an-horse-rearrange-beds.jpg",
+            "alt": "Rearrange Beds album cover"
+          }
+        }
+      ]
+    },
+    {
+      "id": "composer-vs-performer",
+      "name": "Composer vs Performer",
+      "questions": [
+        {
+          "id": "dvorak-lso",
+          "text": "Where would you file Dvorak's \"New World\" Overture performed by London Symphony Orchestra?",
+          "options": [
+            {
+              "id": "D",
+              "text": "Under 'D'"
+            },
+            {
+              "id": "L",
+              "text": "Under 'L'"
+            },
+            {
+              "id": "N",
+              "text": "Under 'N'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Dvořák*, Kertesz*, London Symphony* – Symphony No. 9 \"New World\" ∙ \"Othello\" Overture",
+              "url": "https://www.discogs.com/release/11017018-Dvo%C5%99%C3%A1k-Kertesz-London-Symphony-Symphony-No-9-New-World--Othello-Overture"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/dvorak-new-world-symphony.jpg",
+            "alt": "Dvorak's New World Overture performed by London Symphony Orchestra album cover"
+          }
+        },
+        {
+          "id": "american-football-covers",
+          "text": "Where would you file \"American Football (Covers)\"?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Under 'A'"
+            },
+            {
+              "id": "V",
+              "text": "Under 'V'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "American Football (Covers) - Discogs",
+              "url": "https://www.discogs.com/release/32555592-American-Football-American-Football-Covers"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/american-football-covers.jpg",
+            "alt": "American Football (Covers) album cover"
+          }
+        },
+        {
+          "id": "1989-ryan-adams",
+          "text": "Where would you file 1989 by Ryan Adams?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Under 'A'"
+            },
+            {
+              "id": "R",
+              "text": "Under 'R'"
+            },
+            {
+              "id": "T",
+              "text": "Under 'T'"
+            },
+            {
+              "id": "S",
+              "text": "Under 'S'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "1989 by Ryan Adams - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/1989_(Ryan_Adams_album)"
+            },
+            {
+              "title": "Ryan Adams - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Ryan_Adams"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/ryan-adams-1989.jpg",
+            "alt": "1989 album cover"
+          }
+        },
+        {
+          "id": "baby-driver",
+          "text": "Where would you file the Baby Driver soundtrack?",
+          "options": [
+            {
+              "id": "B",
+              "text": "Under 'B'"
+            },
+            {
+              "id": "S",
+              "text": "Under 'S'"
+            },
+            {
+              "id": "V",
+              "text": "Under 'V'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Baby Driver (soundtrack) - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Baby_Driver_%E2%80%93_Music_from_the_Motion_Picture"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/baby-driver-soundtrack.jpg",
+            "alt": "Baby Driver soundtrack album cover"
+          }
+        },
+        {
+          "id": "interstellar",
+          "text": "Where would you file the Interstellar soundtrack?",
+          "options": [
+            {
+              "id": "I",
+              "text": "Under 'I'"
+            },
+            {
+              "id": "S",
+              "text": "Under 'S'"
+            },
+            {
+              "id": "H",
+              "text": "Under 'H'"
+            },
+            {
+              "id": "Z",
+              "text": "Under 'Z'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Interstellar (soundtrack) - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Interstellar_(soundtrack)"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/interstellar-soundtrack.jpg",
+            "alt": "Interstellar soundtrack album cover"
+          }
+        }
+      ]
+    },
+    {
+      "id": "name-changes",
+      "name": "Artists with Name Changes",
+      "description": "How do you handle artists who have performed under multiple names?",
+      "questions": [
+        {
+          "id": "american-fool",
+          "text": "Where would you file American Fool?",
+          "options": [
+            {
+              "id": "M",
+              "text": "Under 'M'"
+            },
+            {
+              "id": "C",
+              "text": "Under 'C'"
+            },
+            {
+              "id": "J",
+              "text": "Under 'J'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "American Fool - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/American_Fool"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/american-fool.jpg",
+            "alt": "American Fool album cover"
+          }
+        },
+        {
+          "id": "the-lonesome-jubilee",
+          "text": "Where would you file The Lonesome Jubilee?",
+          "options": [
+            {
+              "id": "M",
+              "text": "Under 'M'"
+            },
+            {
+              "id": "C",
+              "text": "Under 'C'"
+            },
+            {
+              "id": "J",
+              "text": "Under 'J'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "The Lonesome Jubilee - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/The_Lonesome_Jubilee"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/the-lonesome-jubilee.jpg",
+            "alt": "The Lonesome Jubilee album cover"
+          }
+        },
+        {
+          "id": "whenever-we-wanted",
+          "text": "Where would you file Whenever We Wanted?",
+          "options": [
+            {
+              "id": "M",
+              "text": "Under 'M'"
+            },
+            {
+              "id": "C",
+              "text": "Under 'C'"
+            },
+            {
+              "id": "J",
+              "text": "Under 'J'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Whenever We Wanted - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Whenever_We_Wanted"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/whenever-we-wanted.jpg",
+            "alt": "Whenever We Wanted album cover"
+          }
+        }
+      ]
+    },
+    {
+      "id": "artist-band-mix",
+      "name": "Solo Artists vs. Their Bands",
+      "description": "How do you handle artists who've performed both solo and with different groups?",
+      "questions": [
+        {
+          "id": "wildflowers",
+          "text": "Where would you file Wildflowers?",
+          "options": [
+            {
+              "id": "T",
+              "text": "Under 'T'"
+            },
+            {
+              "id": "P",
+              "text": "Under 'P'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Wildflowers (Tom Petty album) - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Wildflowers_(Tom_Petty_album)"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/wildflowers.jpg",
+            "alt": "Wildflowers album cover"
+          }
+        },
+        {
+          "id": "into-the-great-wide-open",
+          "text": "Where would you file Into the Great Wide Open?",
+          "options": [
+            {
+              "id": "T",
+              "text": "Under 'T'"
+            },
+            {
+              "id": "P",
+              "text": "Under 'P'"
+            },
+            {
+              "id": "H",
+              "text": "Under 'H'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Into the Great Wide Open - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Into_the_Great_Wide_Open"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/into-the-great-wide-open.jpg",
+            "alt": "Into the Great Wide Open album cover"
+          }
+        },
+        {
+          "id": "pretties-for-you",
+          "text": "Where would you file Pretties for You?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Under 'A'"
+            },
+            {
+              "id": "C",
+              "text": "Under 'C'"
+            },
+            {
+              "id": "V",
+              "text": "Under 'V'"
+            },
+            {
+              "id": "F",
+              "text": "Under 'F'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Pretties for You - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Pretties_for_You"
+            },
+            {
+              "title": "Alice Cooper - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Alice_Cooper"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/pretties-for-you.jpg",
+            "alt": "Pretties for You album cover"
+          }
+        },
+        {
+          "id": "welcome-to-my-nightmare",
+          "text": "Where would you file Welcome to My Nightmare?",
+          "options": [
+            {
+              "id": "A",
+              "text": "Under 'A'"
+            },
+            {
+              "id": "C",
+              "text": "Under 'C'"
+            },
+            {
+              "id": "V",
+              "text": "Under 'V'"
+            },
+            {
+              "id": "F",
+              "text": "Under 'F'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Welcome to My Nightmare - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Welcome_to_My_Nightmare"
+            },
+            {
+              "title": "Alice Cooper - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Alice_Cooper"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/welcome-to-my-nightmare.jpg",
+            "alt": "Welcome to My Nightmare album cover"
+          }
+        },
+        {
+          "id": "where-did-our-love-go",
+          "text": "Where would you file 'Where Did Our Love Go?'?",
+          "options": [
+            {
+              "id": "S",
+              "text": "Under 'S'"
+            },
+            {
+              "id": "D",
+              "text": "Under 'D'"
+            },
+            {
+              "id": "R",
+              "text": "Under 'R'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Where Did Our Love Go? - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Where_Did_Our_Love_Go_(album)"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/where-did-our-love-go.jpg",
+            "alt": "Where Did Our Love Go? album cover"
+          }
+        },
+        {
+          "id": "reflections",
+          "text": "Where would you file 'Reflections'?",
+          "options": [
+            {
+              "id": "S",
+              "text": "Under 'S'"
+            },
+            {
+              "id": "D",
+              "text": "Under 'D'"
+            },
+            {
+              "id": "R",
+              "text": "Under 'R'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Reflections (The Supremes album) - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Reflections_(The_Supremes_album)"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/reflections.jpg",
+            "alt": "Reflections album cover"
+          }
+        }
+      ]
+    },
+    {
+      "id": "titles-and-honorifics",
+      "name": "Titles and Honorifics",
+      "description": "How do you handle artists with titles or honorifics in their names?",
+      "questions": [
+        {
+          "id": "babylon",
+          "text": "Where would you file Babylon",
+          "options": [
+            {
+              "id": "D",
+              "text": "Under 'D'"
+            },
+            {
+              "id": "J",
+              "text": "Under 'J'"
+            },
+            {
+              "id": "R",
+              "text": "Under 'R'"
+            },
+            {
+              "id": "M",
+              "text": "Under 'M'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Dr. John (musician) - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Dr._John"
+            },
+            {
+              "title": "Babylon (album) - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Babylon_(Dr._John_album)"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/babylon.jpg",
+            "alt": "Babylon album cover"
+          }
+        },
+        {
+          "id": "endtroducing",
+          "text": "Where would you file Endtroducing... ?",
+          "options": [
+            {
+              "id": "D",
+              "text": "Under 'D'"
+            },
+            {
+              "id": "S",
+              "text": "Under 'S'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Endtroducing... - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Endtroducing....."
+            }
+          ],
+          "image": {
+            "url": "/images/albums/endtroducing.jpg",
+            "alt": "Endtroducing... album cover"
+          }
+        },
+        {
+          "id": "donuts",
+          "text": "Where would you file Donuts?",
+          "options": [
+            {
+              "id": "D",
+              "text": "Under 'D'"
+            },
+            {
+              "id": "J",
+              "text": "Under 'J'"
+            },
+            {
+              "id": "Y",
+              "text": "Under 'Y'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "J Dilla - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/J_Dilla"
+            },
+            {
+              "title": "Donuts (album) - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Donuts_(album)"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/donuts.jpg",
+            "alt": "Donuts album cover"
+          }
+        },
+        {
+          "id": "mccartney",
+          "text": "Where would you file McCartney (album)?",
+          "options": [
+            {
+              "id": "S",
+              "text": "Under 'S'"
+            },
+            {
+              "id": "J",
+              "text": "Under 'J'"
+            },
+            {
+              "id": "P",
+              "text": "Under 'P'"
+            },
+            {
+              "id": "M",
+              "text": "Under 'M'"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "McCartney (album) - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/McCartney_(album)"
+            },
+            {
+              "title": "Paul McCartney - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Paul_McCartney"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/mccartney.jpg",
+            "alt": "McCartney album cover"
+          }
+        },
+        {
+          "id": "smoke-em-if-you-got-em",
+          "text": "Where would you file Smoke 'Em If You Got 'Em?",
+          "options": [
+            {
+              "id": "R",
+              "text": "Under 'R"
+            },
+            {
+              "id": "H",
+              "text": "Under 'H"
+            },
+            {
+              "id": "J",
+              "text": "Under 'J"
+            },
+            {
+              "id": "T",
+              "text": "Under 'T"
+            },
+            {
+              "id": "other",
+              "text": "Other",
+              "isOther": true
+            }
+          ],
+          "references": [
+            {
+              "title": "Smoke 'Em If You Got 'Em - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/Smoke_%27Em_If_You_Got_%27Em_(The_Reverend_Horton_Heat_album)"
+            },
+            {
+              "title": "The Reverend Horton Heat - Wikipedia",
+              "url": "https://en.wikipedia.org/wiki/The_Reverend_Horton_Heat"
+            }
+          ],
+          "image": {
+            "url": "/images/albums/smoke-em-if-you-got-em.jpg",
+            "alt": "Smoke 'Em If You Got 'Em album cover"
+          }
+        }
+      ]
+    }
+  ]
+}
