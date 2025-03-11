@@ -306,56 +306,12 @@ export default function App() {
       setLoading(true);
       setError(null);
 
-      // Submit any unsaved user selections before fetching results
-      if (Object.keys(userSelections).length > 0) {
-        // Get the questions that have been answered
-        const answeredQuestions = Object.keys(userSelections);
-
-        // Check if there are any unsaved selections that need to be submitted
-        if (answeredQuestions.length > 0) {
-          console.log('Submitting user selections before fetching all results');
-
-          // Submit each answer individually
-          for (const questionId of answeredQuestions) {
-            const selectedOptionId = userSelections[questionId];
-            console.log('Submitting answer for', questionId, selectedOptionId);
-
-            const result = await apiService.submitAnswer({
-              questionId,
-              selectedOptionId,
-            });
-
-            if (!result.success) {
-              console.warn(
-                `Failed to submit answer for question ${questionId}:`,
-                result.error || result.message,
-              );
-            }
-          }
-
-          // Clear all caches to ensure we get fresh results
-          localStorage.removeItem('all_results');
-          localStorage.removeItem('all_results_time');
-        }
-      }
-
-      // Check for recently cached results (cache for 1 minute)
+      // Clear cache to ensure fresh results
       const cacheKey = 'all_results';
-      const cachedData = localStorage.getItem(cacheKey);
-      const cachedTime = localStorage.getItem(`${cacheKey}_time`);
+      localStorage.removeItem(cacheKey);
+      localStorage.removeItem(`${cacheKey}_time`);
 
-      if (cachedData && cachedTime) {
-        const cacheAge = Date.now() - parseInt(cachedTime);
-        if (cacheAge < 60000) {
-          // 1 minute cache
-          console.log('Using cached results for all questions');
-          const parsedData = JSON.parse(cachedData);
-          setResults(parsedData);
-          return parsedData;
-        }
-      }
-
-      // Use the proxy in development
+      // Fetch all results from the API
       console.log('Fetching all survey results');
       const url = '/survey';
 
@@ -505,68 +461,67 @@ export default function App() {
 
   // Main survey interface
   return (
-    <div className='min-h-screen bg-gray-50 py-6 md:py-12'>
-      <div className='mx-auto max-w-md md:max-w-xl lg:max-w-2xl px-4 sm:px-6 lg:px-8'>
-        <div className='space-y-8'>
-          <div className='relative'>
-            {/* Progress bar */}
-            <div className='h-1.5 w-full bg-gray-200 rounded-full overflow-hidden'>
-              <div
-                className='h-full bg-blue-600 transition-all duration-300 ease-in-out'
-                style={{
-                  width: `${
-                    (completedQuestionCount / surveyData.totalQuestions) * 100
-                  }%`,
-                }}
-              />
-            </div>
-            {/* Progress text */}
-            <div className='mt-2 text-xs md:text-sm text-gray-600 text-right'>
-              {completedQuestionCount} of {surveyData.totalQuestions} questions
-              completed
-            </div>
-          </div>
-
+    <div className='min-h-screen bg-gray-50 py-6 md:py-12 flex flex-col'>
+      <div className='mx-auto max-w-md md:max-w-xl lg:max-w-2xl px-4 sm:px-6 lg:px-8 flex-grow'>
+        <div className='space-y-6'>
           {/* Question content */}
           {currentQuestion && (
-            <div className='space-y-4'>
-              {/* Question header with standardized height */}
-              <QuestionHeader question={currentQuestion} />
+            <>
+              {/* Main content container with border */}
+              <div className='bg-white rounded-xl shadow-sm border border-gray-100 p-4 md:p-6'>
+                {/* Question header with standardized height */}
+                <QuestionHeader question={currentQuestion} />
 
-              {/* Fixed height container for consistent content area */}
-              <div className='min-h-[350px] transition-all duration-300 pt-2'>
-                {showResults ? (
-                  <div>
-                    {/* Results view */}
-                    {isPieChart ? (
-                      <PieChartResults
+                {/* Next Question button or placeholder - positioned between header and results */}
+                <div className='mt-10 mb-6 flex justify-center'>
+                  {showResults ? (
+                    <button
+                      onClick={goToNextQuestion}
+                      className='px-4 py-1.5 md:px-6 md:py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center justify-center text-sm md:text-base font-medium shadow-sm'
+                    >
+                      Next Question &rarr;
+                    </button>
+                  ) : (
+                    /* Invisible placeholder to maintain consistent spacing */
+                    <div className='h-10 md:h-11'></div>
+                  )}
+                </div>
+
+                {/* Fixed height container for question options or results */}
+                <div className='min-h-[350px] transition-all duration-300'>
+                  {showResults ? (
+                    <div>
+                      {/* Results view */}
+                      {isPieChart ? (
+                        <PieChartResults
+                          question={currentQuestion}
+                          results={results[currentQuestion.id] || { total: 0 }}
+                          selectedOptionId={selectedOption}
+                        />
+                      ) : (
+                        <Results
+                          question={currentQuestion}
+                          results={results[currentQuestion.id] || { total: 0 }}
+                        />
+                      )}
+                    </div>
+                  ) : (
+                    <div>
+                      {/* Options selection */}
+                      <QuestionOptions
                         question={currentQuestion}
-                        results={results[currentQuestion.id] || { total: 0 }}
-                        selectedOptionId={selectedOption}
+                        options={randomizedOptions}
+                        selectedOption={selectedOption}
+                        onSelect={handleOptionSelect}
+                        disabled={loading}
                       />
-                    ) : (
-                      <Results
-                        question={currentQuestion}
-                        results={results[currentQuestion.id] || { total: 0 }}
-                      />
-                    )}
-                  </div>
-                ) : (
-                  <div>
-                    {/* Options selection */}
-                    <QuestionOptions
-                      question={currentQuestion}
-                      options={randomizedOptions}
-                      selectedOption={selectedOption}
-                      onSelect={handleOptionSelect}
-                      disabled={loading}
-                    />
-                  </div>
-                )}
+                    </div>
+                  )}
+                </div>
               </div>
 
-              {/* Controls - consistent positioning for both views */}
-              <div className='flex justify-between items-center pt-4 border-t border-gray-100'>
+              {/* Chart type selector and View All Results - outside the container */}
+              <div className='flex justify-between items-center'>
                 {showResults && (
                   <div className='bg-gray-100 rounded-lg p-1 inline-flex'>
                     <button
@@ -592,23 +547,13 @@ export default function App() {
                   </div>
                 )}
 
-                <div className='flex gap-2 ml-auto'>
-                  <button
-                    onClick={viewAllResults}
-                    disabled={loading && !showResults}
-                    className='px-2 py-0.5 md:px-3 md:py-1 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 disabled:opacity-50 text-xs md:text-sm'
-                  >
-                    View All Results
-                  </button>
-                  {showResults && (
-                    <button
-                      onClick={goToNextQuestion}
-                      className='px-2 py-0.5 md:px-3 md:py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center justify-center text-xs md:text-sm'
-                    >
-                      Next Question
-                    </button>
-                  )}
-                </div>
+                <button
+                  onClick={viewAllResults}
+                  disabled={loading && !showResults}
+                  className='px-2 py-0.5 md:px-3 md:py-1 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 disabled:opacity-50 text-xs md:text-sm'
+                >
+                  View All Results
+                </button>
               </div>
 
               {/* Display error if any */}
@@ -617,8 +562,30 @@ export default function App() {
                   Error: {error}
                 </div>
               )}
-            </div>
+            </>
           )}
+        </div>
+      </div>
+
+      {/* Progress bar at the bottom */}
+      <div className='mt-auto pb-4 px-4 sm:px-6 lg:px-8'>
+        <div className='mx-auto max-w-md md:max-w-xl lg:max-w-2xl'>
+          {/* Progress text - now centered above the bar */}
+          <div className='mb-2 text-xs md:text-sm text-gray-600 text-center'>
+            {completedQuestionCount} of {surveyData.totalQuestions} questions
+            completed
+          </div>
+
+          <div className='h-1.5 w-full bg-gray-200 rounded-full overflow-hidden'>
+            <div
+              className='h-full bg-blue-600 transition-all duration-300 ease-in-out'
+              style={{
+                width: `${
+                  (completedQuestionCount / surveyData.totalQuestions) * 100
+                }%`,
+              }}
+            />
+          </div>
         </div>
       </div>
     </div>

@@ -400,7 +400,7 @@
       "questions": [
         {
           "id": "dvorak-lso",
-          "text": "Where would you file Dvorak's \"New World\" Overture performed by London Symphony Orchestra?",
+          "text": "Where would you file Dvorak's \"New World\" Overture?",
           "options": [
             {
               "id": "D",

@@ -115,7 +115,6 @@ export function PieChartResults({
               activeShape={renderActiveShape}
               data={chartData}
               {...pieSettings}
-              label={({ percent }) => `${(percent * 100).toFixed(1)}%`}
               labelLine={false}
               strokeWidth={1}
               stroke='#fff'
