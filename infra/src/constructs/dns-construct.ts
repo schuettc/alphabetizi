@@ -1,101 +1,56 @@
 import { Construct } from 'constructs';
 import {
+  Certificate,
+  CertificateValidation,
+} from 'aws-cdk-lib/aws-certificatemanager';
+import {
   HostedZone,
   ARecord,
   RecordTarget,
-  AaaaRecord,
   IHostedZone,
 } from 'aws-cdk-lib/aws-route53';
 import { CloudFrontTarget } from 'aws-cdk-lib/aws-route53-targets';
 import { Distribution } from 'aws-cdk-lib/aws-cloudfront';
-import {
-  Certificate,
-  CertificateValidation,
-} from 'aws-cdk-lib/aws-certificatemanager';
 
-export interface DnsConstructProps {
-  /**
-   * The domain name for the site
-   */
+interface DnsConstructProps {
   domainName: string;
-
-  /**
-   * The subdomain for the site (e.g., app.domain.com)
-   */
-  siteDomain: string;
-
-  /**
-   * The hosted zone ID
-   */
-  hostedZoneId: string;
 }
 
 export class DnsConstruct extends Construct {
   public readonly certificate: Certificate;
   public readonly hostedZone: IHostedZone;
-  private readonly domainName: string;
-  private readonly siteDomain: string;
 
   constructor(scope: Construct, id: string, props: DnsConstructProps) {
     super(scope, id);
 
-    this.domainName = props.domainName;
-    this.siteDomain = props.siteDomain;
+    // Get the root domain from the subdomain
+    const rootDomain = props.domainName.split('.').slice(-2).join('.');
 
-    // Import existing hosted zone
-    this.hostedZone = HostedZone.fromHostedZoneAttributes(this, 'HostedZone', {
-      zoneName: this.domainName,
-      hostedZoneId: props.hostedZoneId,
+    // Look up the parent hosted zone
+    this.hostedZone = HostedZone.fromLookup(this, 'HostedZone', {
+      domainName: rootDomain, // Use the root domain for lookup
     });
 
-    // Create the certificate with DNS validation
-    this.certificate = new Certificate(this, 'SiteCertificate', {
-      domainName: this.domainName,
-      subjectAlternativeNames: [`www.${this.domainName}`, this.siteDomain],
+    // Create certificate for the full domain (including subdomain)
+    this.certificate = new Certificate(this, 'Certificate', {
+      domainName: props.domainName,
+      subjectAlternativeNames: [`www.${props.domainName}`],
       validation: CertificateValidation.fromDns(this.hostedZone),
     });
   }
 
-  /**
-   * Create DNS records for the CloudFront distribution
-   */
-  public createRecords(distribution: Distribution): void {
-    // Create Route53 records for the CloudFront distribution
-    new ARecord(this, 'SiteAliasRecord', {
+  public addDistribution(distribution: Distribution, domainName: string): void {
+    // Create A record for apex domain
+    new ARecord(this, 'ApexRecord', {
       zone: this.hostedZone,
-      recordName: this.siteDomain,
+      recordName: domainName, // This will create the subdomain record
       target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
     });
 
-    new AaaaRecord(this, 'SiteAliasRecordIPv6', {
+    // Create A record for www subdomain
+    new ARecord(this, 'WwwRecord', {
       zone: this.hostedZone,
-      recordName: this.siteDomain,
-      target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
-    });
-
-    // Add records for base domain
-    new ARecord(this, 'BaseAliasRecord', {
-      zone: this.hostedZone,
-      recordName: this.domainName,
-      target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
-    });
-
-    new AaaaRecord(this, 'BaseAliasRecordIPv6', {
-      zone: this.hostedZone,
-      recordName: this.domainName,
-      target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
-    });
-
-    // Add records for www subdomain
-    new ARecord(this, 'WwwAliasRecord', {
-      zone: this.hostedZone,
-      recordName: `www.${this.domainName}`,
-      target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
-    });
-
-    new AaaaRecord(this, 'WwwAliasRecordIPv6', {
-      zone: this.hostedZone,
-      recordName: `www.${this.domainName}`,
+      recordName: `www.${domainName}`,
       target: RecordTarget.fromAlias(new CloudFrontTarget(distribution)),
     });
   }

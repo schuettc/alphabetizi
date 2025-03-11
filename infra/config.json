@@ -1,3 +1,4 @@
 {
-  "apiUrl": "https://${Token[TOKEN.57]}.execute-api.us-east-1.${Token[AWS.URLSuffix.9]}/${Token[TOKEN.65]}/"
+  "app": "alphabetize",
+  "stage": "prod"
 }

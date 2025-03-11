@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "deploy": "cdk deploy --region us-east-1",
-    "synth": "cdk synth"
+    "synth": "cdk synth",
+    "update-config": "AWS_REGION=us-east-1 ts-node scripts/update-config.ts"
   },
   "keywords": [],
   "author": "",
@@ -19,10 +20,16 @@
     "constructs": "10.4.2",
     "fs-extra": "11.3.0",
     "ts-node": "10.9.2",
-    "typescript": "5.8.2"
+    "typescript": "5.8.2",
+    "esbuild": "^0.20.1"
   },
   "packageManager": "pnpm@9.5.0+sha512.140036830124618d624a2187b50d04289d5a087f326c9edfc0ccd733d76c4f52c3a313d4fc148794a2a9d81553016004e6742e8cf850670268a7387fc220c903",
   "dependencies": {
-    "@types/aws-lambda": "^8.10.126"
+    "@aws-sdk/client-cloudformation": "^3.525.0",
+    "@aws-sdk/client-dynamodb": "^3.758.0",
+    "@aws-sdk/client-secrets-manager": "^3.758.0",
+    "@aws-sdk/lib-dynamodb": "^3.758.0",
+    "@types/aws-lambda": "^8.10.126",
+    "uuid": "^11.1.0"
   }
 }
