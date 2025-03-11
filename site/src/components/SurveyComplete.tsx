@@ -10,6 +10,7 @@ import {
   ThumbsDown,
   ArrowLeft,
 } from 'lucide-react';
+import { QuestionHeader } from './QuestionHeader';
 
 interface SurveyCompleteProps {
   questions: Question[];
@@ -153,17 +154,17 @@ export function SurveyComplete({
           {hasSavedPosition && (
             <button
               onClick={onReturn}
-              className='flex items-center gap-1 px-3 py-1.5 md:px-4 md:py-2 bg-blue-50 rounded-lg hover:bg-blue-100 text-blue-700 text-sm md:text-base'
+              className='flex items-center gap-1 px-2 py-0.5 md:px-3 md:py-1 bg-blue-50 rounded-lg hover:bg-blue-100 text-blue-700 text-xs md:text-sm'
             >
-              <ArrowLeft className='h-3.5 w-3.5 md:h-4 md:w-4' />
+              <ArrowLeft className='h-3 w-3 md:h-3.5 md:w-3.5' />
               Return to Survey
             </button>
           )}
           <button
             onClick={onReset}
-            className='flex items-center gap-1 px-3 py-1.5 md:px-4 md:py-2 bg-gray-200 rounded-lg hover:bg-gray-300 text-gray-800 text-sm md:text-base'
+            className='flex items-center gap-1 px-2 py-0.5 md:px-3 md:py-1 bg-gray-200 rounded-lg hover:bg-gray-300 text-gray-800 text-xs md:text-sm'
           >
-            <RefreshCw className='h-3.5 w-3.5 md:h-4 md:w-4' />
+            <RefreshCw className='h-3 w-3 md:h-3.5 md:w-3.5' />
             Reset Survey
           </button>
         </div>
@@ -203,7 +204,7 @@ export function SurveyComplete({
             setSelectedQuestionIndex((prev) => Math.max(0, prev - 1))
           }
           disabled={selectedQuestionIndex === 0}
-          className='px-2 py-1.5 md:px-4 md:py-2 bg-gray-200 rounded-lg disabled:opacity-50 text-sm md:text-base'
+          className='px-2 py-0.5 md:px-3 md:py-1 bg-gray-200 rounded-lg disabled:opacity-50 text-xs md:text-sm'
         >
           Previous
         </button>
@@ -222,7 +223,7 @@ export function SurveyComplete({
             )
           }
           disabled={selectedQuestionIndex === questionsWithResults.length - 1}
-          className='px-2 py-1.5 md:px-4 md:py-2 bg-gray-200 rounded-lg disabled:opacity-50 text-sm md:text-base'
+          className='px-2 py-0.5 md:px-3 md:py-1 bg-gray-200 rounded-lg disabled:opacity-50 text-xs md:text-sm'
         >
           Next
         </button>
@@ -233,41 +234,47 @@ export function SurveyComplete({
         <div className='bg-gray-100 rounded-lg p-1 inline-flex'>
           <button
             onClick={() => toggleViewMode('pie')}
-            className={`p-1.5 md:p-2 rounded-md flex items-center ${
+            className={`p-0.5 md:p-1 rounded-md flex items-center ${
               viewMode === 'pie' ? 'bg-white shadow-sm' : 'text-gray-500'
             }`}
             aria-label='Pie Chart View'
             title='Pie Chart View'
           >
-            <PieChart className='h-4 w-4 md:h-5 md:w-5' />
+            <PieChart className='h-3.5 w-3.5 md:h-4 md:w-4' />
           </button>
           <button
             onClick={() => toggleViewMode('bar')}
-            className={`p-1.5 md:p-2 rounded-md flex items-center ${
+            className={`p-0.5 md:p-1 rounded-md flex items-center ${
               viewMode === 'bar' ? 'bg-white shadow-sm' : 'text-gray-500'
             }`}
             aria-label='Bar Chart View'
             title='Bar Chart View'
           >
-            <BarChart className='h-4 w-4 md:h-5 md:w-5' />
+            <BarChart className='h-3.5 w-3.5 md:h-4 md:w-4' />
           </button>
         </div>
       </div>
 
       {/* Results view */}
       <div className='p-3 md:p-4 border border-gray-200 rounded-lg'>
-        {viewMode === 'pie' ? (
-          <PieChartResults
-            question={currentQuestion}
-            results={results[currentQuestion.id] || { total: 0 }}
-            selectedOptionId={userSelections[currentQuestion.id] || null}
-          />
-        ) : (
-          <Results
-            question={currentQuestion}
-            results={results[currentQuestion.id] || { total: 0 }}
-          />
-        )}
+        {/* Use QuestionHeader for the current question with standardized height */}
+        <QuestionHeader question={currentQuestion} />
+
+        {/* Content with proper spacing after the header */}
+        <div className='pt-4'>
+          {viewMode === 'pie' ? (
+            <PieChartResults
+              question={currentQuestion}
+              results={results[currentQuestion.id] || { total: 0 }}
+              selectedOptionId={userSelections[currentQuestion.id] || null}
+            />
+          ) : (
+            <Results
+              question={currentQuestion}
+              results={results[currentQuestion.id] || { total: 0 }}
+            />
+          )}
+        </div>
       </div>
     </div>
   );

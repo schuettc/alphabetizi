@@ -97,11 +97,8 @@ export function PieChartResults({
   // If there are no votes yet, show a message
   if (chartData.length === 0) {
     return (
-      <div className='space-y-4'>
-        <h2 className='text-center text-xl md:text-3xl font-semibold'>
-          {question.text}
-        </h2>
-        <p className='text-center text-gray-500'>
+      <div className='min-h-[300px] flex flex-col justify-center items-center'>
+        <p className='text-center text-gray-500 mt-4'>
           No votes yet for this question.
         </p>
       </div>
@@ -109,55 +106,9 @@ export function PieChartResults({
   }
 
   return (
-    <div className='space-y-4 md:space-y-6'>
-      <h2 className='text-center text-xl md:text-3xl font-semibold'>
-        {question.text}
-      </h2>
-
-      {/* Display album cover image if available */}
-      {question.image && (
-        <div className='flex justify-center mb-4 md:mb-6'>
-          <img
-            src={question.image.url}
-            alt={question.image.alt}
-            width='300'
-            height='300'
-            loading='lazy'
-            className='rounded-lg shadow-md max-h-36 md:max-h-48 object-contain'
-          />
-        </div>
-      )}
-
-      {/* Display reference links if available */}
-      {question.references && question.references.length > 0 && (
-        <div className='text-center mb-4 md:mb-6'>
-          <p className='text-sm text-gray-500 mb-2'>References:</p>
-          <div className='flex flex-wrap justify-center gap-3'>
-            {question.references.map((link, index) => (
-              <a
-                key={index}
-                href={link.url}
-                target='_blank'
-                rel='noopener noreferrer'
-                className='text-blue-600 hover:text-blue-800 hover:underline text-sm'
-              >
-                {link.title}
-              </a>
-            ))}
-          </div>
-        </div>
-      )}
-
-      <div
-        className='mx-auto'
-        style={{
-          height: 'auto',
-          minHeight: '300px',
-          maxHeight: '380px',
-          maxWidth: '600px',
-        }}
-      >
-        <ResponsiveContainer width='100%' height={300}>
+    <div className='space-y-4'>
+      <div className='mx-auto h-[280px]'>
+        <ResponsiveContainer width='100%' height='100%'>
           <PieChart>
             <Pie
               activeIndex={activeIndex !== null ? activeIndex : undefined}
@@ -179,45 +130,45 @@ export function PieChartResults({
             </Pie>
           </PieChart>
         </ResponsiveContainer>
-
-        {/* Legend as list below the chart */}
-        <div className='grid grid-cols-1 gap-2 mt-4 md:mt-6 max-w-md mx-auto'>
-          {chartData.map((entry, index) => {
-            const percentage = (
-              (entry.value / (results.total || 1)) *
-              100
-            ).toFixed(1);
-            return (
-              <div
-                key={`legend-${index}`}
-                className={`flex items-center justify-between p-2 rounded text-sm md:text-base ${
-                  activeIndex === index
-                    ? 'bg-gray-100 border border-gray-200'
-                    : ''
-                }`}
-              >
-                <div className='flex items-center'>
-                  <div
-                    className='w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3 rounded'
-                    style={{ backgroundColor: COLORS[index % COLORS.length] }}
-                  />
-                  <span className='text-sm md:text-base line-clamp-2'>
-                    {entry.name}
-                  </span>
-                </div>
-                <div className='text-sm md:text-base font-medium flex items-center gap-1 md:gap-2 ml-2 shrink-0'>
-                  <span className='hidden xs:inline'>{entry.value} votes</span>
-                  <span className='px-1.5 py-0.5 md:px-2 md:py-1 rounded-full bg-gray-100 whitespace-nowrap'>
-                    {percentage}%
-                  </span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
       </div>
 
-      <div className='text-center text-gray-600 mt-3 md:mt-4 text-sm md:text-base'>
+      {/* Legend as list below the chart */}
+      <div className='grid grid-cols-1 gap-2 mt-4 max-w-md mx-auto'>
+        {chartData.map((entry, index) => {
+          const percentage = (
+            (entry.value / (results.total || 1)) *
+            100
+          ).toFixed(1);
+          return (
+            <div
+              key={`legend-${index}`}
+              className={`flex items-center justify-between p-2 rounded text-sm md:text-base ${
+                activeIndex === index
+                  ? 'bg-gray-100 border border-gray-200'
+                  : ''
+              }`}
+            >
+              <div className='flex items-center'>
+                <div
+                  className='w-4 h-4 md:w-5 md:h-5 mr-2 md:mr-3 rounded'
+                  style={{ backgroundColor: COLORS[index % COLORS.length] }}
+                />
+                <span className='text-sm md:text-base line-clamp-2'>
+                  {entry.name}
+                </span>
+              </div>
+              <div className='text-sm md:text-base font-medium flex items-center gap-1 md:gap-2 ml-2 shrink-0'>
+                <span className='hidden xs:inline'>{entry.value} votes</span>
+                <span className='px-1.5 py-0.5 md:px-2 md:py-1 rounded-full bg-gray-100 whitespace-nowrap'>
+                  {percentage}%
+                </span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      <div className='text-center text-gray-600 mt-3 text-sm md:text-base'>
         Total votes: <span className='font-semibold'>{results.total || 0}</span>
       </div>
     </div>

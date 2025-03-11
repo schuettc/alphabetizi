@@ -1,38 +1,13 @@
-import { CheckCircle, PieChart, BarChart } from 'lucide-react';
-import { useState, useEffect, useMemo, memo } from 'react';
+import { PieChart, BarChart } from 'lucide-react';
+import { useState, useEffect, useMemo } from 'react';
 import questionsData from './data/questions.json';
 import type { Questions, Question } from './types/questions';
 import { PieChartResults } from './components/PieChartResults';
 import { Results } from './components/Results';
 import { SurveyComplete } from './components/SurveyComplete';
-
-// Memoized question option button component to prevent unnecessary re-renders
-const QuestionOption = memo(
-  ({
-    option,
-    isSelected,
-    onSelect,
-    disabled,
-  }: {
-    option: { id: string; text: string; isOther?: boolean };
-    isSelected: boolean;
-    onSelect: () => void;
-    disabled: boolean;
-  }) => (
-    <button
-      key={option.id}
-      onClick={onSelect}
-      disabled={disabled}
-      className={`relative w-full rounded-2xl border-2 bg-gray-50 p-6 text-left text-xl transition-all hover:bg-gray-100 disabled:opacity-50
-      ${isSelected ? 'border-gray-900 bg-gray-100' : 'border-gray-200'}`}
-    >
-      {option.text}
-      {isSelected && (
-        <CheckCircle className='absolute right-6 top-1/2 h-6 w-6 -translate-y-1/2 text-gray-900' />
-      )}
-    </button>
-  ),
-);
+import { QuestionHeader } from './components/QuestionHeader';
+import { QuestionOptions } from './components/QuestionOptions';
+import { apiService } from './services/api';
 
 // Type assertion to properly type the imported JSON
 const typedQuestionsData = questionsData as Questions;
@@ -42,11 +17,6 @@ interface SurveyResults {
     [optionId: string]: number;
     total: number;
   };
-}
-
-interface SurveyResponse {
-  questionId: string;
-  selectedOption: string;
 }
 
 // Get questions from all groups in a randomized order
@@ -195,8 +165,9 @@ export default function App() {
         return parsedResults;
       }
 
-      const baseUrl = import.meta.env.VITE_API_URL || '';
-      const url = `${baseUrl}/survey?questionId=${questionId}`;
+      // Use the proxy in development
+      console.log('Fetching results for question:', questionId);
+      const url = `/survey?questionId=${questionId}`;
 
       const response = await fetch(url, {
         method: 'GET',
@@ -206,10 +177,13 @@ export default function App() {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorText = await response.text();
+        console.error('API error response:', response.status, errorText);
+        throw new Error(`API returned ${response.status}: ${errorText}`);
       }
 
       const data = await response.json();
+      console.log('Received results:', data);
 
       // Cache the results for this question
       sessionStorage.setItem(`results_${questionId}`, JSON.stringify(data));
@@ -243,7 +217,7 @@ export default function App() {
     setLoading(true);
 
     try {
-      // Save the selection
+      // Save the selection to local state
       setUserSelections((prev) => ({
         ...prev,
         [currentQuestion.id]: optionId,
@@ -252,6 +226,31 @@ export default function App() {
       // Update the completed question count if it's not already counted
       if (!userSelections[currentQuestion.id]) {
         setCompletedQuestionCount((prev) => prev + 1);
+      }
+
+      // Submit the user's answer to the backend
+      console.log(
+        'Submitting answer for current question',
+        currentQuestion.id,
+        optionId,
+      );
+      const response = await apiService.submitAnswer({
+        questionId: currentQuestion.id,
+        selectedOptionId: optionId,
+      });
+
+      if (!response.success) {
+        console.error(
+          'Failed to submit answer:',
+          response.error || response.message,
+        );
+        // Continue anyway to show results
+      } else {
+        console.log('Answer submitted successfully');
+
+        // Clear cache for this question to ensure we get fresh results
+        sessionStorage.removeItem(`results_${currentQuestion.id}`);
+        sessionStorage.removeItem(`results_timestamp_${currentQuestion.id}`);
       }
 
       // Fetch the latest results for this question
@@ -307,6 +306,39 @@ export default function App() {
       setLoading(true);
       setError(null);
 
+      // Submit any unsaved user selections before fetching results
+      if (Object.keys(userSelections).length > 0) {
+        // Get the questions that have been answered
+        const answeredQuestions = Object.keys(userSelections);
+
+        // Check if there are any unsaved selections that need to be submitted
+        if (answeredQuestions.length > 0) {
+          console.log('Submitting user selections before fetching all results');
+
+          // Submit each answer individually
+          for (const questionId of answeredQuestions) {
+            const selectedOptionId = userSelections[questionId];
+            console.log('Submitting answer for', questionId, selectedOptionId);
+
+            const result = await apiService.submitAnswer({
+              questionId,
+              selectedOptionId,
+            });
+
+            if (!result.success) {
+              console.warn(
+                `Failed to submit answer for question ${questionId}:`,
+                result.error || result.message,
+              );
+            }
+          }
+
+          // Clear all caches to ensure we get fresh results
+          localStorage.removeItem('all_results');
+          localStorage.removeItem('all_results_time');
+        }
+      }
+
       // Check for recently cached results (cache for 1 minute)
       const cacheKey = 'all_results';
       const cachedData = localStorage.getItem(cacheKey);
@@ -323,8 +355,9 @@ export default function App() {
         }
       }
 
-      const baseUrl = import.meta.env.VITE_API_URL || '';
-      const url = `${baseUrl}/survey`;
+      // Use the proxy in development
+      console.log('Fetching all survey results');
+      const url = '/survey';
 
       const response = await fetch(url, {
         method: 'GET',
@@ -334,10 +367,13 @@ export default function App() {
       });
 
       if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
+        const errorText = await response.text();
+        console.error('API error response:', response.status, errorText);
+        throw new Error(`API returned ${response.status}: ${errorText}`);
       }
 
       const data = await response.json();
+      console.log('Received all results:', data);
 
       // If no results returned, generate sample data for demonstration
       if (Object.keys(data).length === 0) {
@@ -493,114 +529,87 @@ export default function App() {
 
           {/* Question content */}
           {currentQuestion && (
-            <div className='space-y-6'>
-              {/* Only show header and image when not showing results to avoid duplication */}
-              {!showResults && (
-                <div className='space-y-4'>
-                  <h2 className='text-xl md:text-2xl font-bold'>
-                    {currentQuestion.text}
-                  </h2>
+            <div className='space-y-4'>
+              {/* Question header with standardized height */}
+              <QuestionHeader question={currentQuestion} />
 
-                  {/* Display album cover image if available */}
-                  {currentQuestion.image && (
-                    <div className='flex justify-center mb-4'>
-                      <img
-                        src={currentQuestion.image.url}
-                        alt={currentQuestion.image.alt}
-                        width='300'
-                        height='300'
-                        loading='lazy'
-                        className='rounded-lg shadow-md max-h-36 md:max-h-48 object-contain'
+              {/* Fixed height container for consistent content area */}
+              <div className='min-h-[350px] transition-all duration-300 pt-2'>
+                {showResults ? (
+                  <div>
+                    {/* Results view */}
+                    {isPieChart ? (
+                      <PieChartResults
+                        question={currentQuestion}
+                        results={results[currentQuestion.id] || { total: 0 }}
+                        selectedOptionId={selectedOption}
                       />
-                    </div>
-                  )}
-                </div>
-              )}
-
-              {showResults ? (
-                <div className='space-y-6'>
-                  {/* Results view */}
-                  {isPieChart ? (
-                    <PieChartResults
-                      question={currentQuestion}
-                      results={results[currentQuestion.id] || { total: 0 }}
-                      selectedOptionId={selectedOption}
-                    />
-                  ) : (
-                    <Results
-                      question={currentQuestion}
-                      results={results[currentQuestion.id] || { total: 0 }}
-                    />
-                  )}
-
-                  {/* Controls for results view */}
-                  <div className='flex justify-between items-center pt-4'>
-                    <div className='bg-gray-100 rounded-lg p-1 inline-flex'>
-                      <button
-                        onClick={() => setIsPieChart(true)}
-                        className={`p-1.5 md:p-2 rounded-md flex items-center ${
-                          isPieChart ? 'bg-white shadow-sm' : 'text-gray-500'
-                        }`}
-                        aria-label='Pie Chart View'
-                        title='Pie Chart View'
-                      >
-                        <PieChart className='h-4 w-4 md:h-5 md:w-5' />
-                      </button>
-                      <button
-                        onClick={() => setIsPieChart(false)}
-                        className={`p-1.5 md:p-2 rounded-md flex items-center ${
-                          !isPieChart ? 'bg-white shadow-sm' : 'text-gray-500'
-                        }`}
-                        aria-label='Bar Chart View'
-                        title='Bar Chart View'
-                      >
-                        <BarChart className='h-4 w-4 md:h-5 md:w-5' />
-                      </button>
-                    </div>
-
-                    <div className='flex gap-2'>
-                      <button
-                        onClick={viewAllResults}
-                        className='px-3 py-1.5 md:px-4 md:py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 text-sm md:text-base'
-                      >
-                        View All Results
-                      </button>
-                      <button
-                        onClick={goToNextQuestion}
-                        className='px-3 py-1.5 md:px-4 md:py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center justify-center text-sm md:text-base'
-                      >
-                        Next Question
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ) : (
-                <>
-                  {/* Options list */}
-                  <div className='space-y-3'>
-                    {randomizedOptions.map((option) => (
-                      <QuestionOption
-                        key={option.id}
-                        option={option}
-                        isSelected={selectedOption === option.id}
-                        onSelect={() => handleOptionSelect(option.id)}
-                        disabled={loading}
+                    ) : (
+                      <Results
+                        question={currentQuestion}
+                        results={results[currentQuestion.id] || { total: 0 }}
                       />
-                    ))}
+                    )}
                   </div>
-
-                  {/* View all results button */}
-                  <div className='flex justify-end pt-4'>
-                    <button
-                      onClick={viewAllResults}
+                ) : (
+                  <div>
+                    {/* Options selection */}
+                    <QuestionOptions
+                      question={currentQuestion}
+                      options={randomizedOptions}
+                      selectedOption={selectedOption}
+                      onSelect={handleOptionSelect}
                       disabled={loading}
-                      className='px-3 py-1.5 md:px-4 md:py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 disabled:opacity-50 text-sm md:text-base'
+                    />
+                  </div>
+                )}
+              </div>
+
+              {/* Controls - consistent positioning for both views */}
+              <div className='flex justify-between items-center pt-4 border-t border-gray-100'>
+                {showResults && (
+                  <div className='bg-gray-100 rounded-lg p-1 inline-flex'>
+                    <button
+                      onClick={() => setIsPieChart(true)}
+                      className={`p-0.5 md:p-1 rounded-md flex items-center ${
+                        isPieChart ? 'bg-white shadow-sm' : 'text-gray-500'
+                      }`}
+                      aria-label='Pie Chart View'
+                      title='Pie Chart View'
                     >
-                      View All Results
+                      <PieChart className='h-3.5 w-3.5 md:h-4 md:w-4' />
+                    </button>
+                    <button
+                      onClick={() => setIsPieChart(false)}
+                      className={`p-0.5 md:p-1 rounded-md flex items-center ${
+                        !isPieChart ? 'bg-white shadow-sm' : 'text-gray-500'
+                      }`}
+                      aria-label='Bar Chart View'
+                      title='Bar Chart View'
+                    >
+                      <BarChart className='h-3.5 w-3.5 md:h-4 md:w-4' />
                     </button>
                   </div>
-                </>
-              )}
+                )}
+
+                <div className='flex gap-2 ml-auto'>
+                  <button
+                    onClick={viewAllResults}
+                    disabled={loading && !showResults}
+                    className='px-2 py-0.5 md:px-3 md:py-1 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 disabled:opacity-50 text-xs md:text-sm'
+                  >
+                    View All Results
+                  </button>
+                  {showResults && (
+                    <button
+                      onClick={goToNextQuestion}
+                      className='px-2 py-0.5 md:px-3 md:py-1 bg-blue-600 text-white rounded-lg hover:bg-blue-700 flex items-center justify-center text-xs md:text-sm'
+                    >
+                      Next Question
+                    </button>
+                  )}
+                </div>
+              </div>
 
               {/* Display error if any */}
               {error && (
